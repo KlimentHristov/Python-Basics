@@ -20,21 +20,18 @@ else:
     print('Late')
 
 # second condition
-if 0 <= true_time <= 59:
-    print(f"{true_time} minutes before the start")
-elif true_time >= 60:
-    if true_time % 60 < 10:
-        print(f"{math.floor(true_time/60)}:0{true_time%60} hours before the start")
-    else:
-        print(f"{math.floor(true_time / 60)}:{true_time % 60} hours before the start")
-else:
-    if abs(true_time) <= 59:
-        if abs(true_time) < 10:
-            print(f"{abs(true_time)} minutes after the start")
+if true_time != 0:
+    if 0 <= true_time <= 59:
+        print(f"{true_time} minutes before the start")
+    elif true_time >= 60:
+        if true_time % 60 < 10:
+            print(f"{math.floor(true_time/60)}:0{true_time%60} hours before the start")
         else:
-            print(f"{abs(true_time)} minutes after the start")
+            print(f"{math.floor(true_time / 60)}:{true_time % 60} hours before the start")
+    elif 0<= abs(true_time) <= 59:
+        print(f"{abs(true_time)} minutes after the start")
     else:
         if abs(true_time) % 60 < 10:
-            print(f"{math.floor(abs(true_time / 60))}:0{abs(true_time % 60)} hours after the start")
+            print(f"{math.floor(abs(true_time)/60)}:0{abs(true_time)%60} hours after the start")
         else:
-            print(f"{math.floor(abs((true_time / 60)))}:{abs(true_time % 60)} hours after the start")
+            print(f"{math.floor(abs(true_time) / 60)}:{abs(true_time) % 60} hours after the start")
