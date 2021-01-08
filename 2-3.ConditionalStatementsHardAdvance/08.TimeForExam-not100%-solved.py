@@ -1,57 +1,40 @@
 import math
-hourExam = int(input())
-minutesExam = int(input())
-hourArrive = int(input())
-minutesArrive = int(input())
+hour_per_exam = int(input()) * 60
+min_per_exam = int(input())
 
-totalExam = (hourExam * 60) + minutesExam
-totalArrive = (hourArrive * 60) + minutesArrive
-result = 0
-result2 = 0
-reminder = 0
-if totalExam < totalArrive:
-    result = totalArrive - totalExam
-    if result > 60:
-        result2 = result
-        reminder = result2 % 30
-        result2 /=30
-        result //=60
-        print("Late")
-        print(f"{result}:{result2:.0f}{reminder} hours after the start")
+hour_per_arrive = int(input()) * 60
+min_per_arrive = int(input())
+
+total_time_arrive = hour_per_arrive + min_per_arrive
+total_time_exam = hour_per_exam + min_per_exam
+true_time = total_time_exam - total_time_arrive #min Early
+
+# 13:00 Exam  ==  13:00 arrive or Exam <= 30 min.
+if 0 <= true_time <= 30:
+    print("On Time")
+# 13:00 Exam > 12:10 arrive
+elif true_time > 30:
+    print('Early')
+# 13:00 Exam  <  13:05 arrive
+else:
+    print('Late')
+
+# second condition
+if 0 <= true_time <= 59:
+    print(f"{true_time} minutes before the start")
+elif true_time >= 60:
+    if true_time % 60 < 10:
+        print(f"{math.floor(true_time/60)}:0{true_time%60} hours before the start")
     else:
-        print("Late")
-        print(f"{result} minutes after the start")
-elif totalExam >= totalArrive:
-    result = totalExam - totalArrive
-    if result > 30:
-        if result > 60:
-            result2 = result
-            reminder = result2 % 30
-            result //= 60
-            print("Early")
-            print(f"{result}:{reminder} hours before the start")
-        elif result == 60:
-            result = 1
-            reminder = 0
-            print("Early")
-            print(f"{result}:{reminder}{reminder}hours before the start")
+        print(f"{math.floor(true_time / 60)}:{true_time % 60} hours before the start")
+else:
+    if abs(true_time) <= 59:
+        if abs(true_time) < 10:
+            print(f"{abs(true_time)} minutes after the start")
         else:
-            print("Early")
-            print(f"{result} minutes before the start")
+            print(f"{abs(true_time)} minutes after the start")
     else:
-        if result > 60:
-            result2 = result
-            reminder = result2 % 30
-            result2 /= 30
-            result //= 60
-            print("On time")
-            print(f"{result}:{result2:.0f}{reminder} hours after the start")
+        if abs(true_time) % 60 < 10:
+            print(f"{math.floor(abs(true_time / 60))}:0{abs(true_time % 60)} hours after the start")
         else:
-            print("On time")
-            print(f"{result} minutes before the start")
-
-
-
-
-
-
+            print(f"{math.floor(abs((true_time / 60)))}:{abs(true_time % 60)} hours after the start")
